@@ -1,0 +1,23 @@
+- content_for :page_title do
+  Show page
+
+.common-first-actions
+  %ul.common-first-actions__items.is-inline-blocks
+    %li.common-first-actions__item
+      = link_to site_pages_path(@site), :class => 'btn btn-default' do
+        %i.fa.fa-reply
+        Back
+    %li.common-first-actions__item
+      = link_to edit_site_page_path(@site, @page), :class => 'btn btn-primary' do
+        %i.fa.fa-edit
+        Edit
+
+%dl.dl-horizontal
+  %dt Title:
+  %dd= @page.title
+  %dt Template:
+  %dd= @page.template
+  %dt Path:
+  %dd= @page.path
+  %dt Data:
+  %dd= @page.data

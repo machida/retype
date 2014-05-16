@@ -1,16 +1,37 @@
-.page-header
-  = link_to sites_path, :class => 'btn btn-default' do
-    %span.glyphicon.glyphicon-list-alt
-    Back
-  = link_to edit_site_path(@site), :class => 'btn btn-primary' do
-    %span.glyphicon.glyphicon-pencil
-    Edit
-  %h1 Show site
+- content_for :page_title do
+  About #{@site.name}
+
+.common-first-actions
+  %ul.common-first-actions__items.is-inline-blocks
+    %li.common-first-actions__item
+      = link_to sites_path, :class => 'btn btn-default' do
+        %i.fa.fa-reply
+        Back
+    %li.common-first-actions__item
+      = link_to edit_site_path(@site), :class => 'btn btn-primary' do
+        %i.fa.fa-edit
+        Edit
 
 %dl.dl-horizontal
   %dt Name:
   %dd= @site.name
-  %dt S3 access key:
-  %dd= @site.s3_access_key
-  %dt S3 secret key:
-  %dd= @site.s3_secret_key
+  %dt Theme:
+  %dd= @site.theme
+  %dt Deploy type:
+  %dd= @site.deploy_type
+  - if @site.deploy_type == 's3'
+    %dt S3 region:
+    %dd= @site.s3_region
+    %dt S3 access key:
+    %dd= @site.s3_access_key
+    %dt S3 secret key:
+    %dd= @site.s3_secret_key
+  - elsif @site.deploy_type == 'ftp'
+    %dt FTP Host:
+    %dd= @site.ftp_host
+    %dt FTP Directory:
+    %dd= @site.ftp_directory
+    %dt FTP User:
+    %dd= @site.ftp_user
+    %dt FTP Password:
+    %dd= @site.ftp_password

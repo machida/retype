@@ -1,26 +1,46 @@
-.page-header
-  = link_to new_site_path, :class => 'btn btn-primary' do
-    %span.glyphicon.glyphicon-plus
-    New Site
+%header.page-header
   %h1 Listing sites
 
+.common-first-actions
+  %ul.common-first-actions__items.is-inline-blocks
+    %li.common-first-actions__item
+      = link_to new_site_path, :class => 'btn btn-primary' do
+        %i.fa.fa-plus
+        Add Site
 .table-responsive
   %table.table.table-striped.table-bordered.table-hover
-    %thead
+    %thead.table-header
       %tr
-        %th Name
-        %th S3 access key
-        %th S3 secret key
-        %th
-        %th
-        %th
+        %th.table-header__label.is-vertical-center Name
+        %th.table-header__label.is-vertical-center Theme
+        %th.table-header__label.is-vertical-center
 
     %tbody
       - @sites.each do |site|
         %tr
-          %td= site.name
-          %td= site.s3_access_key
-          %td= site.s3_secret_key
-          %td= link_to 'Show', site
-          %td= link_to 'Edit', edit_site_path(site)
-          %td= link_to 'Destroy', site, :data => { confirm: 'Are you sure?' }, :method => :delete
+          %td.is-vertical-center.cell-hover
+            .cell-hover__inner.is-relative
+              = link_to site_pages_path(site) do
+                = site.name
+                %span.table-actions__count-number
+                  = site.pages.count
+              %ul.cell-hover__items
+                %li.cell-hover__item
+                  = link_to edit_site_path(site), class: "btn btn-warning btn-sm cell-hover__button" do
+                    %i.fa.fa-cog.fa-lg
+
+          %td.is-vertical-center= site.theme
+          %td.is-vertical-center.table-actions
+            %ul.table-actions__items.is-inline-blocks
+              %li.table-actions__item<>
+                = link_to new_site_page_path(site), class: "btn btn-default btn-sm table-actions__button" do
+                  %i.fa.fa-plus
+                  %i.fa.fa-file-o.fa-lg
+              %li.table-actions__item<>
+                = link_to deploy_site_path(site), :data => { confirm: 'Are you sure?' }, :method => :post, class: "btn btn-primary btn-sm table-actions__button" do
+                  %i.fa.fa-cloud-upload.fa-lg
+              %li.table-actions__item<>
+                = link_to site, :data => { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-danger btn-sm table-actions__button" do
+                  %i.fa.fa-trash-o.fa-lg
+
+

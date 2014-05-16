@@ -1,0 +1,30 @@
+= form_for [@site, @page], :html => { :class => "form-horizontal" } do |f|
+  -if @page.errors.any?
+    .alert.alert-danger.alert-dismissable
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+      %h4= "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+
+      %ul
+        - @page.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :title, :class => 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :title, :class => 'form-control'
+  .form-group
+    = f.label :template, :class => 'col-sm-2 control-label'
+    .col-sm-10
+      = f.collection_select :template, @page.templates, :to_s, :to_s, prompt: true, :class => 'form-control'
+  .form-group
+    = f.label :path, :class => 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :path, :class => 'form-control', placeholder: '/path/to/page'
+  .form-group
+    = f.label :data, :class => 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_area :data, :class => 'form-control form-group__lg-textarea', data: { default: @page.default_data.to_json }
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit :class => 'btn btn-primary'

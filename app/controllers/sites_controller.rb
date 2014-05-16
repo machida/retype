@@ -1,11 +1,11 @@
 class SitesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_site, only: [:show, :edit, :update, :destroy, :deploy]
 
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
+    @sites = current_user.sites.all
   end
 
   # GET /sites/1
@@ -15,7 +15,7 @@ class SitesController < ApplicationController
 
   # GET /sites/new
   def new
-    @site = Site.new
+    @site = current_user.sites.build
   end
 
   # GET /sites/1/edit
@@ -25,7 +25,7 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
-    @site = Site.new(site_params)
+    @site = current_user.sites.build(site_params)
 
     respond_to do |format|
       if @site.save
@@ -62,14 +62,19 @@ class SitesController < ApplicationController
     end
   end
 
+  def deploy
+    @site.deploy
+    redirect_to sites_url
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_site
-      @site = Site.find(params[:id])
+      @site = current_user.sites.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:name, :s3_access_key, :s3_secret_key)
+      params.require(:site).permit(:name, :theme, :s3_access_key, :s3_secret_key, :s3_region, :deploy_type, :ftp_host, :ftp_directory, :ftp_user, :ftp_password)
     end
 end

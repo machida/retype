@@ -1,3 +1,5 @@
+ruby "2.1.2"
+
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
@@ -12,6 +14,10 @@ gem 'haml-rails'
 gem 'devise'
 gem 'bootstrap-generators', '~> 3.1.1'
 gem 'browser', '~> 0.4.1'
+gem 'aws-sdk-core', '~> 2.0.0.rc7'
+gem 'mimemagic'
+gem 'jquery-turbolinks'
+gem 'ftp_sync'
 
 # Sass
 gem 'sass', '~> 3.3.7'
@@ -20,7 +26,12 @@ gem 'compass', '~> 1.0.0.alpha.19'
 gem 'compass-rails', '~> 1.1.7'
 gem 'bootstrap-sass'
 # gem 'oulu-rails', path: '../oulu-rails'
-gem 'oulu-rails', '~> 0.1.18', github: 'oulu/oulu-rails'
+gem 'oulu-rails', '~> 0.1.22', github: 'oulu/oulu-rails'
+
+group :production do
+  gem 'rails_12factor'
+  gem 'unicorn'
+end
 
 group :development do
   gem 'spring'
