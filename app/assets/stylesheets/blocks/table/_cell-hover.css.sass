@@ -1,11 +1,12 @@
 .cell-hover
   &:hover
     .cell-hover__button
-      +inline-block
+      +opacity(1)
 .cell-hover__items
   +absolute(right, 0, top, -6px)
 .cell-hover__item
   +inline-block(bottom)
 .cell-hover__button
   +rem('font-size', 14px)
-  display: none
+  +opacity(0)
+  +inline-block

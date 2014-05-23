@@ -1,7 +1,17 @@
 $block-slug: statics_index-features
 
+.#{$block-slug}
+  text-align: center
+.#{$block-slug}__icon
+  background-color: $body-bg-d
+  +rem('height', 220px)
+  +rem('width', 220px)
+  +side-mg-auto
+  +border-radius(50%)
+  text-align: center
+  +text-block(90px, 220px)
 .#{$block-slug}__title
-  +montserrat(400)
+  +bold-ja
   text-align: center
   color: $brand-primary
 .#{$block-slug}__body
