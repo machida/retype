@@ -3,13 +3,14 @@ $block-slug: statics_index-features
 .#{$block-slug}
   text-align: center
 .#{$block-slug}__icon
+  $circle-sz: 120px
   background-color: $body-bg-d
-  +rem('height', 220px)
-  +rem('width', 220px)
+  +rem('height', $circle-sz)
+  +rem('width', $circle-sz)
   +side-mg-auto
   +border-radius(50%)
   text-align: center
-  +text-block(90px, 220px)
+  +text-block(40px, $circle-sz)
 .#{$block-slug}__title
   +bold-ja
   text-align: center
